@@ -6,35 +6,57 @@ const Example = () => {
     <div>
       <Title>Example</Title>
       <Form className="">
-        <Input type="text" placeholder="First name"></Input>
-        <Input type="text" placeholder="Last name"></Input>
-        <Input type="password" placeholder="Password"></Input>
-        <Input type="email" placeholder="Email"></Input>
-        <Input type="tel" placeholder="Mobile number"></Input>
-        <Input type="url" placeholder="GitHub Account"></Input>
+        <Input type="text" placeholder="First name" />
+        <Input type="text" placeholder="Last name" />
+        <Input type="email" placeholder="Email" />
+        <Input type="tel" placeholder="Mobile number" />
+        <Input type="url" placeholder="GitHub Account" />
         <Select>
+          <option value="" selected>
+            Select...
+          </option>
           <option value="Mr">Mr</option>
           <option value="Mrs">Mrs</option>
           <option value="Miss">Miss</option>
           <option value="Dr">Dr</option>
         </Select>
-        <div>
-          <input type="radio" value="Student" id="student"></input>
-          <label htmlFor="student">Student</label>
-          <input type="radio" value="Developer" id="developer"></input>
-          <label htmlFor="developer">Developer</label>
-          <input type="radio" value="Other" id="other"></input>
-          <label htmlFor="other">Other</label>
-        </div>
-        <div>
-          <label htmlFor="bdate">Date of birth</label>
-          <input type="date" id="bdate"></input>
-        </div>
-        <div>
-          <input type="checkbox" id="remember-me"></input>
-          <label htmlFor="remember-me"> Remember me</label>
-        </div>
-        <input type="submit" value="Submit"></input>
+        <Radio>
+          <Label htmlFor="student">
+            Student{' '}
+            <input
+              type="radio"
+              name="occupation"
+              value="Student"
+              id="student"
+            />
+          </Label>
+
+          <Label htmlFor="developer">
+            Developer{' '}
+            <input
+              type="radio"
+              name="occupation"
+              value="Developer"
+              id="developer"
+            />
+          </Label>
+
+          <Label htmlFor="other">
+            Other{' '}
+            <input type="radio" name="occupation" value="Other" id="other" />
+          </Label>
+        </Radio>
+        <Date>
+          <label htmlFor="bdate">
+            Date of birth <InputDate type="date" id="bdate" />
+          </label>
+        </Date>
+        <Checkbox>
+          <label htmlFor="remember-me">
+            Remember me <input type="checkbox" id="remember-me" />
+          </label>
+        </Checkbox>
+        <Submit type="submit" value="Submit" />
       </Form>
     </div>
   )
@@ -48,13 +70,80 @@ const Form = styled.form`
 `
 
 const Input = styled.input`
-  padding: 6px 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  padding: 10px 6px;
   margin-bottom: 20px;
   border-radius: 4px;
+  border: 1px solid var(--dark-blue);
+
+  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    border: 1px solid var(--pink);
+  }
 `
 
 const Select = styled.select`
-  padding: 6px 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  padding: 10px 6px;
   margin-bottom: 20px;
   border-radius: 4px;
+  border: 1px solid var(--dark-blue);
+
+  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    border: 1px solid var(--pink);
+  }
+`
+const Radio = styled.div`
+  margin-bottom: 20px;
+`
+
+const Date = styled.div`
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  margin-bottom: 40px;
+`
+
+const InputDate = styled.input`
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  padding: 10px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--dark-blue);
+
+  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    border: 1px solid var(--pink);
+  }
+`
+
+const Checkbox = styled.div`
+  margin-bottom: 20px;
+`
+
+const Label = styled.label`
+  margin-right: 20px;
+`
+const Submit = styled.input`
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  color: var(--white);
+  background: var(--light-pink);
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  border: 1px solid var(--light-pink);
+  border-radius: 4px;
+  padding: 16px 10px;
+  cursor: pointer;
+
+  transition: background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  &:hover {
+    background-color: var(--pink);
+  }
 `
