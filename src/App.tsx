@@ -1,5 +1,8 @@
 import Title from './components/Title'
 import Example from './components/Example'
+import Watch from './components/Watch'
+import Errors from './components/Errors'
+import Touched from './components/Touched'
 import styled from 'styled-components'
 import './App.css'
 
@@ -15,9 +18,9 @@ function App() {
       </Header>
       <Grid>
         <Example />
-        <Title>Watch</Title>
-        <Title>Errors</Title>
-        <Title>Touched</Title>
+        <Watch />
+        <Errors />
+        <Touched />
       </Grid>
     </>
   )
