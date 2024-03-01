@@ -1,0 +1,28 @@
+:root {
+  --dark-blue: #081229;
+  --light-blue: #516391;
+  --white: #ffffff;
+  --pink: #bf1650;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+* {
+  margin: unset;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  background-color: var(--dark-blue);
+  color: var(--white);
+  padding: 20px;
+}
