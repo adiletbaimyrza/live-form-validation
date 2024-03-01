@@ -1,4 +1,3 @@
-import Title from './components/Title'
 import Example from './components/Example'
 import Watch from './components/Watch'
 import Errors from './components/Errors'
