@@ -4,7 +4,6 @@ import { schema } from './schema'
 import { Example, Watch, Errors, Touched } from './components'
 import styled from 'styled-components'
 import './App.css'
-import { useState } from 'react'
 
 export type FormValues = {
   fname: string
@@ -23,10 +22,9 @@ const submitHandler = (data: FormValues) => {
 }
 
 function App() {
-  const { register, handleSubmit } = useForm<FormValues>({
+  const { register, handleSubmit, control } = useForm<FormValues>({
     resolver: yupResolver(schema),
   })
-  const [formData, setFormData] = useState<FormValues>()
 
   return (
     <>
@@ -43,7 +41,7 @@ function App() {
           handleSubmit={handleSubmit}
           submitHandler={submitHandler}
         />
-        <Watch formData={formData} />
+        <Watch control={control} />
         <Errors />
         <Touched />
       </Grid>
