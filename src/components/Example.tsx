@@ -1,20 +1,26 @@
-import Title from './Title'
+import { UseFormRegister, UseFormHandleSubmit } from 'react-hook-form'
+import { Title } from '.'
 import styled from 'styled-components'
+import { FormValues } from '../App'
 
-const Example = () => {
+type ExampleProps = {
+  register: UseFormRegister<FormValues>
+  handleSubmit: UseFormHandleSubmit<FormValues, undefined>
+  submitHandler: (data: FormValues) => void
+}
+
+const Example = ({ register, handleSubmit, submitHandler }: ExampleProps) => {
   return (
     <div>
       <Title>Example</Title>
-      <Form className="">
-        <Input type="text" placeholder="First name" />
-        <Input type="text" placeholder="Last name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="tel" placeholder="Mobile number" />
-        <Input type="url" placeholder="GitHub Account" />
-        <Select>
-          <option value="" selected>
-            Select...
-          </option>
+      <Form onSubmit={handleSubmit(submitHandler)}>
+        <Input {...register('fname')} type="text" placeholder="First name" />
+        <Input {...register('lname')} type="text" placeholder="Last name" />
+        <Input {...register('email')} type="email" placeholder="Email" />
+        <Input {...register('tel')} type="tel" placeholder="Mobile number" />
+        <Input {...register('url')} type="url" placeholder="GitHub Account" />
+        <Select {...register('title')} defaultValue="">
+          <option value="">Select...</option>
           <option value="Mr">Mr</option>
           <option value="Mrs">Mrs</option>
           <option value="Miss">Miss</option>
@@ -24,6 +30,7 @@ const Example = () => {
           <Label htmlFor="student">
             Student{' '}
             <input
+              {...register('occupation')}
               type="radio"
               name="occupation"
               value="Student"
@@ -34,6 +41,7 @@ const Example = () => {
           <Label htmlFor="developer">
             Developer{' '}
             <input
+              {...register('occupation')}
               type="radio"
               name="occupation"
               value="Developer"
@@ -43,17 +51,25 @@ const Example = () => {
 
           <Label htmlFor="other">
             Other{' '}
-            <input type="radio" name="occupation" value="Other" id="other" />
+            <input
+              {...register('occupation')}
+              type="radio"
+              name="occupation"
+              value="Other"
+              id="other"
+            />
           </Label>
         </Radio>
         <Date>
           <label htmlFor="bdate">
-            Date of birth <InputDate type="date" id="bdate" />
+            Date of birth{' '}
+            <InputDate {...register('bdate')} type="date" id="bdate" />
           </label>
         </Date>
         <Checkbox>
-          <label htmlFor="remember-me">
-            Remember me <input type="checkbox" id="remember-me" />
+          <label htmlFor="remember">
+            Remember me{' '}
+            <input {...register('remember')} type="checkbox" id="remember" />
           </label>
         </Checkbox>
         <Submit type="submit" value="Submit" />

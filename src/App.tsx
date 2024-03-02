@@ -1,11 +1,33 @@
-import Example from './components/Example'
-import Watch from './components/Watch'
-import Errors from './components/Errors'
-import Touched from './components/Touched'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { schema } from './schema'
+import { Example, Watch, Errors, Touched } from './components'
 import styled from 'styled-components'
 import './App.css'
+import { useState } from 'react'
+
+export type FormValues = {
+  fname: string
+  lname: string
+  email: string
+  tel: string
+  url: string
+  title: 'Mrs' | 'Mr' | 'Miss' | 'Dr'
+  occupation: 'Student' | 'Developer' | 'Other'
+  bdate: Date
+  remember: boolean
+}
+
+const submitHandler = (data: FormValues) => {
+  console.log(data)
+}
 
 function App() {
+  const { register, handleSubmit } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  })
+  const [formData, setFormData] = useState<FormValues>()
+
   return (
     <>
       <Header>
@@ -16,8 +38,12 @@ function App() {
         </Subheading>
       </Header>
       <Grid>
-        <Example />
-        <Watch />
+        <Example
+          register={register}
+          handleSubmit={handleSubmit}
+          submitHandler={submitHandler}
+        />
+        <Watch formData={formData} />
         <Errors />
         <Touched />
       </Grid>

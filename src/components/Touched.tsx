@@ -1,5 +1,4 @@
-import SubTitle from './SubTitle'
-import Title from './Title'
+import { SubTitle, Title } from '.'
 
 const Touched = () => {
   return (
