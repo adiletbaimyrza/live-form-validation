@@ -33,7 +33,7 @@ const Pre = styled.pre`
   margin-bottom: 12px;
   padding-left: 30px;
   padding-right: 30px;
-  line-height: 3;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-wrap: break-word;
   max-width: 355px;

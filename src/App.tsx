@@ -9,7 +9,7 @@ export type FormValues = {
   fname: string
   lname: string
   email: string
-  tel: string
+  tel: number
   url: string
   title: 'Mrs' | 'Mr' | 'Miss' | 'Dr'
   occupation: 'Student' | 'Developer' | 'Other'
@@ -24,6 +24,7 @@ const submitHandler = (data: FormValues) => {
 function App() {
   const { register, handleSubmit, control } = useForm<FormValues>({
     resolver: yupResolver(schema),
+    mode: 'onChange',
   })
 
   return (
@@ -42,8 +43,8 @@ function App() {
           submitHandler={submitHandler}
         />
         <Watch control={control} />
-        <Errors />
-        <Touched />
+        <Errors control={control} />
+        <Touched control={control} />
       </Grid>
     </>
   )

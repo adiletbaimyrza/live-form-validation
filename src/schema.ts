@@ -14,10 +14,9 @@ const schema = yup.object().shape({
     .email('Email must be a valid email')
     .required('Email is required'),
   tel: yup
-    .string()
-    .matches(/^[0-9]+$/, 'Phone number must only contain digits')
-    .min(9, 'Phone number must be at least 10 digits')
-    .max(15, 'Phone number must not exceed 15 digits')
+    .number()
+    .min(100000000, 'Phone number must be at least 10 digits')
+    .max(999999999999999, 'Phone number must not exceed 15 digits')
     .required('Phone number is required'),
   url: yup.string().url('URL must be a valid URL').required('URL is required'),
   title: yup
