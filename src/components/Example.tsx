@@ -215,6 +215,6 @@ const Submit = styled.input`
   transition: background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   &:hover {
-    background-color: var(--light-pink);
+    background-color: var(--pink);
   }
 `

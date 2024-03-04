@@ -2,26 +2,30 @@ import { Control, useFormState } from 'react-hook-form'
 import { SubTitle, Title, Pre } from '.'
 import { FormValues } from '../App'
 
+type TransformedErrorsType = {
+  [key: string]: {
+    type: string | number
+    message: string
+  }
+}
+
 const Errors = ({ control }: { control: Control<FormValues> }) => {
   const { errors } = useFormState({ control })
 
-  const simplifiedErrors = Object.keys(errors).reduce(
-    (acc, key) => {
-      acc[key] = {
-        type: errors[key]?.type,
-        message: '',
-      }
-      return acc
-    },
-    {} as Record<string, { type: string; message: string }>,
-  )
+  const transformedErrors: TransformedErrorsType = {}
+  Object.entries(errors).forEach(([key, value]) => {
+    transformedErrors[key] = {
+      type: value?.type || '',
+      message: '',
+    }
+  })
 
   return (
     <div>
       <Title>Errors</Title>
       <SubTitle>Validation errors will appear here</SubTitle>
-      {Object.keys(simplifiedErrors).length > 0 && (
-        <Pre>{JSON.stringify(simplifiedErrors, null, 2)}</Pre>
+      {Object.keys(transformedErrors).length > 0 && (
+        <Pre>{JSON.stringify(transformedErrors, null, 2)}</Pre>
       )}
     </div>
   )
