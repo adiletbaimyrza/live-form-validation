@@ -31,37 +31,33 @@ const Example = ({
           {...register('fname')}
           type="text"
           placeholder="First name"
-          hasError={!!errors.fname}
+          $error={!!errors.fname}
         />
         <Input
           {...register('lname')}
           type="text"
           placeholder="Last name"
-          hasError={!!errors.lname}
+          $error={!!errors.lname}
         />
         <Input
           {...register('email')}
           type="email"
           placeholder="Email"
-          hasError={!!errors.email}
+          $error={!!errors.email}
         />
         <Input
           {...register('tel')}
           type="tel"
           placeholder="Mobile number"
-          hasError={!!errors.tel}
+          $error={!!errors.tel}
         />
         <Input
           {...register('url')}
           type="url"
           placeholder="GitHub Account"
-          hasError={!!errors.url}
+          $error={!!errors.url}
         />
-        <Select
-          {...register('title')}
-          defaultValue=""
-          hasError={!!errors.title}
-        >
+        <Select {...register('title')} defaultValue="" $error={!!errors.title}>
           <option value="">Select...</option>
           <option value="Mr">Mr</option>
           <option value="Mrs">Mrs</option>
@@ -69,7 +65,7 @@ const Example = ({
           <option value="Dr">Dr</option>
         </Select>
         <Radio>
-          <Label htmlFor="student" hasError={!!errors.occupation}>
+          <Label htmlFor="student" $error={!!errors.occupation}>
             Student{' '}
             <input
               {...register('occupation')}
@@ -80,7 +76,7 @@ const Example = ({
             />
           </Label>
 
-          <Label htmlFor="developer" hasError={!!errors.occupation}>
+          <Label htmlFor="developer" $error={!!errors.occupation}>
             Developer{' '}
             <input
               {...register('occupation')}
@@ -91,7 +87,7 @@ const Example = ({
             />
           </Label>
 
-          <Label htmlFor="other" hasError={!!errors.occupation}>
+          <Label htmlFor="other" $error={!!errors.occupation}>
             Other{' '}
             <input
               {...register('occupation')}
@@ -109,7 +105,7 @@ const Example = ({
               {...register('bdate')}
               type="date"
               id="bdate"
-              hasError={!!errors.bdate}
+              $error={!!errors.bdate}
             />
           </label>
         </Date>
@@ -132,7 +128,7 @@ const Form = styled.form`
   flex-direction: column;
 `
 
-const Input = styled.input<{ hasError?: boolean }>`
+const Input = styled.input<{ $error: boolean }>`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   padding: 10px 6px;
@@ -140,8 +136,8 @@ const Input = styled.input<{ hasError?: boolean }>`
   border-radius: 4px;
   border-style: solid;
   border-color: ${(props) =>
-    props.hasError ? 'var(--light-pink)' : 'var(--dark-blue)'};
-  border-width: 1px 1px 1px ${(props) => (props.hasError ? 10 : 1)}px;
+    props.$error ? 'var(--light-pink)' : 'var(--dark-blue)'};
+  border-width: 1px 1px 1px ${(props) => (props.$error ? 10 : 1)}px;
 
   transition: border 0.2s linear;
 
@@ -150,7 +146,7 @@ const Input = styled.input<{ hasError?: boolean }>`
   }
 `
 
-const Select = styled.select<{ hasError?: boolean }>`
+const Select = styled.select<{ $error: boolean }>`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   padding: 10px 6px;
@@ -158,8 +154,8 @@ const Select = styled.select<{ hasError?: boolean }>`
   border-radius: 4px;
   border-style: solid;
   border-color: ${(props) =>
-    props.hasError ? 'var(--light-pink)' : 'var(--dark-blue)'};
-  border-width: 1px 1px 1px ${(props) => (props.hasError ? 10 : 1)}px;
+    props.$error ? 'var(--light-pink)' : 'var(--dark-blue)'};
+  border-width: 1px 1px 1px ${(props) => (props.$error ? 10 : 1)}px;
 
   transition: border 0.2s linear;
 
@@ -177,15 +173,15 @@ const Date = styled.div`
   margin-bottom: 40px;
 `
 
-const DateInput = styled.input<{ hasError: boolean }>`
+const DateInput = styled.input<{ $error: boolean }>`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   padding: 10px 6px;
   border-radius: 4px;
   border-style: solid;
   border-color: ${(props) =>
-    props.hasError ? 'var(--light-pink)' : 'var(--dark-blue)'};
-  border-width: 1px 1px 1px ${(props) => (props.hasError ? 10 : 1)}px;
+    props.$error ? 'var(--light-pink)' : 'var(--dark-blue)'};
+  border-width: 1px 1px 1px ${(props) => (props.$error ? 10 : 1)}px;
 
   transition: border 0.2s linear;
 
@@ -198,9 +194,9 @@ const Checkbox = styled.div`
   margin-bottom: 20px;
 `
 
-const Label = styled.label<{ hasError?: boolean }>`
+const Label = styled.label<{ $error: boolean }>`
   margin-right: 20px;
-  color: ${(props) => (props.hasError ? 'var(--light-pink)' : 'var(--white)')};
+  color: ${(props) => (props.$error ? 'var(--light-pink)' : 'var(--white)')};
 `
 
 const Submit = styled.input`
