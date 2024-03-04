@@ -4,7 +4,7 @@ const Title = styled.h1`
   text-align: center;
   font-size: 24px;
   font-weight: 400;
-  margin-top: 60px;
+  margin-top: 30px;
   margin-bottom: 20px;
   overflow: hidden;
 

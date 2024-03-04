@@ -1,4 +1,9 @@
-import { UseFormRegister, UseFormHandleSubmit } from 'react-hook-form'
+import {
+  UseFormRegister,
+  UseFormHandleSubmit,
+  Control,
+  useFormState,
+} from 'react-hook-form'
 import { Title } from '.'
 import styled from 'styled-components'
 import { FormValues } from '../App'
@@ -7,19 +12,56 @@ type ExampleProps = {
   register: UseFormRegister<FormValues>
   handleSubmit: UseFormHandleSubmit<FormValues, undefined>
   submitHandler: (data: FormValues) => void
+  control: Control<FormValues>
 }
 
-const Example = ({ register, handleSubmit, submitHandler }: ExampleProps) => {
+const Example = ({
+  register,
+  handleSubmit,
+  submitHandler,
+  control,
+}: ExampleProps) => {
+  const { errors } = useFormState({ control })
+
   return (
     <div>
       <Title>Example</Title>
       <Form onSubmit={handleSubmit(submitHandler)}>
-        <Input {...register('fname')} type="text" placeholder="First name" />
-        <Input {...register('lname')} type="text" placeholder="Last name" />
-        <Input {...register('email')} type="email" placeholder="Email" />
-        <Input {...register('tel')} type="tel" placeholder="Mobile number" />
-        <Input {...register('url')} type="url" placeholder="GitHub Account" />
-        <Select {...register('title')} defaultValue="">
+        <Input
+          {...register('fname')}
+          type="text"
+          placeholder="First name"
+          hasError={!!errors.fname}
+        />
+        <Input
+          {...register('lname')}
+          type="text"
+          placeholder="Last name"
+          hasError={!!errors.lname}
+        />
+        <Input
+          {...register('email')}
+          type="email"
+          placeholder="Email"
+          hasError={!!errors.email}
+        />
+        <Input
+          {...register('tel')}
+          type="tel"
+          placeholder="Mobile number"
+          hasError={!!errors.tel}
+        />
+        <Input
+          {...register('url')}
+          type="url"
+          placeholder="GitHub Account"
+          hasError={!!errors.url}
+        />
+        <Select
+          {...register('title')}
+          defaultValue=""
+          hasError={!!errors.title}
+        >
           <option value="">Select...</option>
           <option value="Mr">Mr</option>
           <option value="Mrs">Mrs</option>
@@ -27,7 +69,7 @@ const Example = ({ register, handleSubmit, submitHandler }: ExampleProps) => {
           <option value="Dr">Dr</option>
         </Select>
         <Radio>
-          <Label htmlFor="student">
+          <Label htmlFor="student" hasError={!!errors.occupation}>
             Student{' '}
             <input
               {...register('occupation')}
@@ -38,7 +80,7 @@ const Example = ({ register, handleSubmit, submitHandler }: ExampleProps) => {
             />
           </Label>
 
-          <Label htmlFor="developer">
+          <Label htmlFor="developer" hasError={!!errors.occupation}>
             Developer{' '}
             <input
               {...register('occupation')}
@@ -49,7 +91,7 @@ const Example = ({ register, handleSubmit, submitHandler }: ExampleProps) => {
             />
           </Label>
 
-          <Label htmlFor="other">
+          <Label htmlFor="other" hasError={!!errors.occupation}>
             Other{' '}
             <input
               {...register('occupation')}
@@ -63,7 +105,12 @@ const Example = ({ register, handleSubmit, submitHandler }: ExampleProps) => {
         <Date>
           <label htmlFor="bdate">
             Date of birth{' '}
-            <InputDate {...register('bdate')} type="date" id="bdate" />
+            <DateInput
+              {...register('bdate')}
+              type="date"
+              id="bdate"
+              hasError={!!errors.bdate}
+            />
           </label>
         </Date>
         <Checkbox>
@@ -85,33 +132,39 @@ const Form = styled.form`
   flex-direction: column;
 `
 
-const Input = styled.input`
+const Input = styled.input<{ hasError?: boolean }>`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   padding: 10px 6px;
   margin-bottom: 20px;
   border-radius: 4px;
-  border: 1px solid var(--dark-blue);
+  border-style: solid;
+  border-color: ${(props) =>
+    props.hasError ? 'var(--light-pink)' : 'var(--dark-blue)'};
+  border-width: 1px 1px 1px ${(props) => (props.hasError ? 10 : 1)}px;
 
-  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: border 0.2s linear;
 
   &:hover {
-    border: 1px solid var(--pink);
+    border-color: var(--light-pink);
   }
 `
 
-const Select = styled.select`
+const Select = styled.select<{ hasError?: boolean }>`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   padding: 10px 6px;
   margin-bottom: 20px;
   border-radius: 4px;
-  border: 1px solid var(--dark-blue);
+  border-style: solid;
+  border-color: ${(props) =>
+    props.hasError ? 'var(--light-pink)' : 'var(--dark-blue)'};
+  border-width: 1px 1px 1px ${(props) => (props.hasError ? 10 : 1)}px;
 
-  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: border 0.2s linear;
 
   &:hover {
-    border: 1px solid var(--pink);
+    border-color: var(--light-pink);
   }
 `
 const Radio = styled.div`
@@ -124,17 +177,20 @@ const Date = styled.div`
   margin-bottom: 40px;
 `
 
-const InputDate = styled.input`
+const DateInput = styled.input<{ hasError: boolean }>`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   padding: 10px 6px;
   border-radius: 4px;
-  border: 1px solid var(--dark-blue);
+  border-style: solid;
+  border-color: ${(props) =>
+    props.hasError ? 'var(--light-pink)' : 'var(--dark-blue)'};
+  border-width: 1px 1px 1px ${(props) => (props.hasError ? 10 : 1)}px;
 
-  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: border 0.2s linear;
 
   &:hover {
-    border: 1px solid var(--pink);
+    border-color: var(--light-pink);
   }
 `
 
@@ -142,9 +198,11 @@ const Checkbox = styled.div`
   margin-bottom: 20px;
 `
 
-const Label = styled.label`
+const Label = styled.label<{ hasError?: boolean }>`
   margin-right: 20px;
+  color: ${(props) => (props.hasError ? 'var(--light-pink)' : 'var(--white)')};
 `
+
 const Submit = styled.input`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
@@ -160,6 +218,6 @@ const Submit = styled.input`
   transition: background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   &:hover {
-    background-color: var(--pink);
+    background-color: var(--light-pink);
   }
 `

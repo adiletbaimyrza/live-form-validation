@@ -41,6 +41,7 @@ function App() {
           register={register}
           handleSubmit={handleSubmit}
           submitHandler={submitHandler}
+          control={control}
         />
         <Watch control={control} />
         <Errors control={control} />
@@ -59,10 +60,10 @@ const Header = styled.div`
 
 const Heading = styled.h1`
   margin: 0 auto;
-  font-size: 50px;
+  font-size: 40px;
   padding: 2px 0;
   border-bottom: 2px solid var(--pink);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `
 
 const Subheading = styled.p`
