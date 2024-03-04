@@ -1,12 +1,11 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from './schema'
-import { Example, Watch, Errors, Touched } from './components'
-import styled, { keyframes } from 'styled-components'
+import { Example, Watch, Errors, Touched, SubmitModal } from './components'
+
+import styled from 'styled-components'
 import './App.css'
-import { Modal } from '@mui/material'
-import { useState } from 'react'
-import { Title } from './components'
 
 export type FormValues = {
   fname: string
@@ -21,7 +20,7 @@ export type FormValues = {
 }
 
 function App() {
-  const [OpenModal, setOpenModal] = useState<boolean>(false)
+  const [openModal, setOpenModal] = useState<boolean>(false)
   const [formData, setFormData] = useState<FormValues | null>(null)
   const { register, handleSubmit, control } = useForm<FormValues>({
     resolver: yupResolver(schema),
@@ -53,13 +52,11 @@ function App() {
         <Errors control={control} />
         <Touched control={control} />
       </Grid>
-      <Modal open={OpenModal} onClose={() => setOpenModal(false)}>
-        <ModalCard>
-          <Title>Submit</Title>
-          <Pre>{formData && JSON.stringify(formData, null, 2)}</Pre>
-          <Close onClick={() => setOpenModal(false)}>Close</Close>
-        </ModalCard>
-      </Modal>
+      <SubmitModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        formData={formData}
+      />
     </>
   )
 }
@@ -90,58 +87,4 @@ const Grid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 40px;
   margin: 0 50px;
-`
-
-const ModalCard = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--dark-blue);
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 5px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-`
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`
-
-const Pre = styled.pre`
-  margin-top: 12px;
-  margin-bottom: 12px;
-  padding-left: 30px;
-  padding-right: 30px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  max-width: 355px;
-  animation: ${fadeIn} 0.8s linear;
-`
-
-const Close = styled.button`
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
-  color: var(--white);
-  background: var(--light-pink);
-  letter-spacing: 0.2rem;
-  text-transform: uppercase;
-  border: 1px solid var(--light-pink);
-  border-radius: 4px;
-  padding: 16px 10px;
-  cursor: pointer;
-  margin-top: 20px;
-
-  transition: background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-
-  &:hover {
-    background-color: var(--light-pink);
-  }
 `

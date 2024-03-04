@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const Title = styled.h1`
   text-align: center;
@@ -30,4 +30,25 @@ const Title = styled.h1`
   }
 `
 
-export default Title
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+const Pre = styled.pre`
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 355px;
+  animation: ${fadeIn} 1s ease-in;
+`
+
+export { Title, Pre }

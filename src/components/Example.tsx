@@ -5,8 +5,9 @@ import {
   useFormState,
 } from 'react-hook-form'
 import { Title } from '.'
-import styled from 'styled-components'
 import { FormValues } from '../App'
+
+import styled from 'styled-components'
 
 type ExampleProps = {
   register: UseFormRegister<FormValues>

@@ -1,8 +1,10 @@
 import Errors from './Errors'
 import Example from './Example'
 import SubTitle from './SubTitle'
-import Title from './Title'
 import Touched from './Touched'
 import Watch from './Watch'
+import SubmitModal from './SubmitModal'
 
-export { Errors, Example, SubTitle, Title, Touched, Watch }
+import { Title, Pre } from './styledComponents'
+
+export { Errors, Example, SubTitle, Touched, Watch, SubmitModal, Title, Pre }
