@@ -21,7 +21,7 @@ export type FormValues = {
 }
 
 function App() {
-  const [openSubmit, setOpenSubmit] = useState<boolean>(false)
+  const [OpenModal, setOpenModal] = useState<boolean>(false)
   const [formData, setFormData] = useState<FormValues | null>(null)
   const { register, handleSubmit, control } = useForm<FormValues>({
     resolver: yupResolver(schema),
@@ -30,7 +30,7 @@ function App() {
 
   const submitHandler = (data: FormValues) => {
     setFormData(data)
-    setOpenSubmit(true)
+    setOpenModal(true)
   }
 
   return (
@@ -53,11 +53,11 @@ function App() {
         <Errors control={control} />
         <Touched control={control} />
       </Grid>
-      <Modal open={openSubmit} onClose={() => setOpenSubmit(false)}>
+      <Modal open={OpenModal} onClose={() => setOpenModal(false)}>
         <ModalCard>
           <Title>Submit</Title>
           <Pre>{formData && JSON.stringify(formData, null, 2)}</Pre>
-          <Close onClick={() => setOpenSubmit(false)}>Close</Close>
+          <Close onClick={() => setOpenModal(false)}>Close</Close>
         </ModalCard>
       </Modal>
     </>
